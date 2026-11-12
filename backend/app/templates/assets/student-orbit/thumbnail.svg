@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="400" viewBox="0 0 640 400" role="img" aria-labelledby="title desc">
+  <title id="title">Orbit thumbnail</title>
+  <desc id="desc">Lavender bento layout with a tilted identity panel and offset project cards.</desc>
+  <rect width="640" height="400" rx="28" fill="#faf9f6"/>
+  <text x="40" y="58" font-family="Arial, sans-serif" font-size="20" font-weight="800" fill="#252330">orbit.</text>
+  <rect x="510" y="40" width="90" height="26" rx="13" fill="none" stroke="#e5e2ed"/>
+  <text x="40" y="118" font-family="Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="3" fill="#7257d8">STUDENT PORTFOLIO</text>
+  <text x="40" y="168" font-family="Arial, sans-serif" font-size="44" font-weight="800" letter-spacing="-2" fill="#252330">Small ideas.</text>
+  <text x="40" y="214" font-family="Arial, sans-serif" font-size="44" font-weight="800" letter-spacing="-2" fill="#252330">Real impact.</text>
+  <rect x="40" y="244" width="120" height="34" rx="8" fill="#7257d8"/>
+  <rect x="172" y="244" width="120" height="34" rx="8" fill="none" stroke="#e5e2ed"/>
+  <g transform="rotate(4 490 190)"><rect x="400" y="100" width="190" height="180" rx="24" fill="#e8e0f6" stroke="#d9cdec"/>
+  <text x="424" y="210" font-family="Arial, sans-serif" font-size="58" font-weight="800" letter-spacing="-4" fill="#7257d8">AM</text>
+  <rect x="490" y="236" width="84" height="28" rx="8" fill="#fff"/></g>
+  <rect x="40" y="312" width="170" height="64" rx="14" fill="#e7e1fc"/>
+  <rect x="235" y="324" width="170" height="64" rx="14" fill="#d6efe6"/>
+  <rect x="430" y="312" width="170" height="64" rx="14" fill="#f7dfce"/>
+</svg>

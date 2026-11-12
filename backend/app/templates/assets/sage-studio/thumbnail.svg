@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="400" viewBox="0 0 640 400" role="img" aria-labelledby="title desc">
+  <title id="title">Sage Studio thumbnail</title>
+  <desc id="desc">Organic sage-toned layout with warm consulting aesthetic.</desc>
+  <defs>
+    <linearGradient id="sage" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f6f2ea" />
+      <stop offset="1" stop-color="#e6dac8" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="400" fill="url(#sage)" rx="28" />
+  <rect x="48" y="60" width="240" height="60" rx="20" fill="#d2e4d7" />
+  <text x="64" y="98" font-family="'Fraunces', serif" font-size="36" fill="#2f4739">Sage Studio</text>
+  <text x="48" y="148" font-family="'General Sans', sans-serif" font-size="16" fill="#5e5a51" opacity="0.8">Advisory &amp; transformation</text>
+  <rect x="48" y="180" width="220" height="140" rx="24" fill="#ffffff" stroke="#d9cfc0" stroke-width="1.5" />
+  <text x="72" y="220" font-family="'Fraunces', serif" font-size="28" fill="#2f4739">Practice</text>
+  <text x="72" y="255" font-family="'General Sans', sans-serif" font-size="14" fill="#7c786c">Strategy / CX / Ops</text>
+  <rect x="300" y="180" width="280" height="140" rx="30" fill="#ede6dc" />
+  <text x="324" y="222" font-family="'Fraunces', serif" font-size="30" fill="#2f4739">Engagement</text>
+  <text x="324" y="258" font-family="'General Sans', sans-serif" font-size="14" fill="#5e5a51">Growth-stage operating model</text>
+  <rect x="300" y="330" width="260" height="10" fill="#6d9077" opacity="0.4" />
+</svg>

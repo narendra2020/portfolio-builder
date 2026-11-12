@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="400" viewBox="0 0 640 400" role="img" aria-labelledby="title desc">
+  <title id="title">Midnight Systems thumbnail</title>
+  <desc id="desc">Dark dashboard grid with electric blue and lime system signals.</desc>
+  <defs>
+    <linearGradient id="dash" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#070910" />
+      <stop offset="1" stop-color="#111a2a" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="400" fill="url(#dash)" rx="28" />
+  <rect x="40" y="48" width="560" height="56" rx="16" fill="#0f1726" stroke="#27324a" stroke-width="1.5" />
+  <text x="64" y="86" font-family="'Space Grotesk', sans-serif" font-size="22" fill="#6de9c1">System Status</text>
+  <circle cx="540" cy="76" r="9" fill="#2f6bff" />
+  <circle cx="564" cy="76" r="9" fill="#57f7c9" />
+  <rect x="40" y="124" width="260" height="220" rx="20" fill="#111d31" stroke="#27324a" stroke-width="1.5" />
+  <rect x="320" y="124" width="280" height="220" rx="20" fill="#111d31" stroke="#27324a" stroke-width="1.5" />
+  <text x="64" y="164" font-family="'IBM Plex Mono', monospace" font-size="14" letter-spacing="6" fill="#6a7499">UPTIME</text>
+  <text x="64" y="198" font-family="'Space Grotesk', sans-serif" font-size="34" fill="#57f7c9">99.9%</text>
+  <text x="352" y="164" font-family="'IBM Plex Mono', monospace" font-size="14" letter-spacing="6" fill="#6a7499">SIGNALS</text>
+  <rect x="352" y="188" width="200" height="12" fill="#2f6bff" />
+  <rect x="352" y="210" width="160" height="12" fill="#57f7c9" />
+  <rect x="352" y="232" width="220" height="12" fill="#2f6bff" opacity="0.4" />
+  <text x="352" y="270" font-family="'Space Grotesk', sans-serif" font-size="20" fill="#d0d7ff">Mission control</text>
+  <text x="352" y="302" font-family="'Space Grotesk', sans-serif" font-size="14" fill="#8b92b3">Midnight Systems template preview</text>
+</svg>

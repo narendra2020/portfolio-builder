@@ -1,0 +1,198 @@
+{#
+  Shared markup for the five student showcase templates (Orbit, Midnight,
+  Paper, Playground, Fieldwork). Each entry template sets `tpl` and
+  includes this file; the visual direction lives entirely in that
+  template's own CSS. `tpl` keys:
+    key           — slug suffix, used for data-template + theme storage key
+    name          — shown in <title>
+    default_theme — "classic" or "dark"
+    art           — hero panel word: "initials" | "braces" | "monogram" | literal text
+#}
+{% set hero = answers.get('hero') or {} %}
+{% set about = answers.get('about') or {} %}
+{% set journey = answers.get('journey') or {} %}
+{% set work = answers.get('work') or {} %}
+{% set skills = answers.get('skills') or {} %}
+{% set contact = answers.get('contact') or {} %}
+{% set display_name = (profile.display_name if profile else None) or "Portfolio" %}
+{% set first_name = (display_name.split() or [display_name])[0] %}
+{% set brand_initials = initials or display_name[0] %}
+{% set hero_image = hero.get('hero_image_url') or (profile.profile_image if profile else None) %}
+{% set has_learning = skills.get('groups') or journey.get('entries') %}
+{% set theme_key = 'tpl-student-' ~ tpl.key ~ '-theme' %}
+<!doctype html>
+<html lang="en" data-theme="{{ tpl.default_theme }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ display_name }} | {{ tpl.name }} Student Portfolio</title>
+<meta name="description" content="{{ hero.get('lead') or (display_name ~ ' — student portfolio') }}">
+<script>try{var t=localStorage.getItem({{ theme_key | tojson }});if(t==='dark'||t==='classic')document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-template="{{ tpl.key }}" data-theme-key="{{ theme_key }}">
+<a class="skip" href="#main">Skip to content</a>
+<header>
+  <a class="brand" href="#home">{{ first_name | lower }}.</a>
+  <nav id="navigation" aria-label="Main navigation">
+    {% if about.get('intro_large') or about.get('body') %}<a href="#about">About</a>{% endif %}
+    {% if work.get('projects') %}<a href="#projects">Projects</a>{% endif %}
+    {% if has_learning %}<a href="#learning">Learning</a>{% endif %}
+    {% if contact.get('email') %}<a href="#contact">Let's connect ↗</a>{% endif %}
+  </nav>
+  <div class="header-actions">
+    <button class="theme-toggle" type="button" aria-label="Toggle color theme">Dark mode</button>
+    <button class="menu" type="button" aria-controls="navigation" aria-expanded="false">Menu</button>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" id="home">
+    <div>
+      <p class="eyebrow">{{ display_name }}{% if hero.get('eyebrow_text') %} / {{ hero.eyebrow_text }}{% endif %}</p>
+      <h1>{{ hero.get('headline') or display_name }}{% if hero.get('headline_highlight') %}<br><em>{{ hero.headline_highlight }}</em>{% endif %}</h1>
+      {% if hero.get('lead') %}<p class="lead">{{ hero.lead }}</p>{% endif %}
+      <div class="actions">
+        {% if hero.get('primary_cta_label') %}<a class="button" href="{{ hero.get('primary_cta_target') or '#projects' }}">{{ hero.primary_cta_label }} ↘</a>{% endif %}
+        {% if hero.get('secondary_cta_label') %}<a class="button secondary" href="{{ hero.get('secondary_cta_target') or '#contact' }}">{{ hero.secondary_cta_label }}</a>{% endif %}
+      </div>
+      {% if hero.get('quick_facts') %}
+      <div class="stats">
+        {% for fact in hero.quick_facts %}<div><b>{{ fact.get('value', '') }}</b><span>{{ fact.get('label', '') }}</span></div>{% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    <aside class="hero-art{% if hero_image %} has-photo{% endif %}" aria-label="Portfolio introduction">
+      {% if hero_image %}
+      <img src="{{ hero_image }}" alt="{{ display_name }}">
+      {% else %}
+      <span class="eyebrow">Student / Maker / Explorer</span>
+      <span class="big">{% if tpl.art == 'initials' %}{{ brand_initials }}{% elif tpl.art == 'braces' %}{ {{ first_name | lower }} }{% elif tpl.art == 'monogram' %}{{ brand_initials | lower }}.{% else %}{{ tpl.art }}{% endif %}</span>
+      {% endif %}
+      {% set first_info = (about.get('info_items') or [none])[0] %}
+      {% if first_info %}<span class="note">{{ first_info.get('label', '') }} · {{ first_info.get('value', '') }}</span>{% endif %}
+    </aside>
+  </section>
+
+  {% if about.get('intro_large') or about.get('body') %}
+  <section id="about" class="split">
+    <div>
+      <p class="eyebrow">{{ about.get('kicker') or '01 / Behind the work' }}</p>
+      <h2>{{ about.get('heading_lead') or 'A work in progress.' }}{% if about.get('heading_highlight') %}<br><em>{{ about.heading_highlight }}</em>{% endif %}</h2>
+      {% if about.get('about_photo') %}<img class="about-photo" src="{{ about.about_photo }}" alt="{{ display_name }}">{% endif %}
+    </div>
+    <div>
+      {% if about.get('intro_large') %}<p class="lead">{{ about.intro_large }}</p>{% endif %}
+      {% if about.get('body') %}<p class="muted">{{ about.body }}</p>{% endif %}
+      {% if about.get('info_items') %}
+      <dl class="info">
+        {% for item in about.info_items %}<div><dt>{{ item.get('label', '') }}</dt><dd>{{ item.get('value', '') }}</dd></div>{% endfor %}
+      </dl>
+      {% endif %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if work.get('projects') %}
+  <section id="projects">
+    <div class="section-top">
+      <div>
+        <p class="eyebrow">{{ work.get('kicker') or '02 / Selected work' }}</p>
+        <h2>{{ work.get('heading') or 'Ideas out in the world.' }}</h2>
+      </div>
+      {% if work.get('intro') %}<span class="muted">{{ work.intro }}</span>{% endif %}
+    </div>
+    <div class="cards">
+      {% for project in work.projects %}
+      {% set visual_class = ['one', 'two', 'three'][loop.index0 % 3] %}
+      <article class="card{% if project.get('featured') %} featured{% endif %}">
+        <div class="visual {{ visual_class }}"{% if not project.get('image_url') %} aria-hidden="true"{% endif %}>
+          {% if project.get('image_url') %}
+          <img src="{{ project.image_url }}" alt="{{ project.get('title', 'Project') }}">
+          {% else %}
+          <div class="mini-window"><span class="tag">Project / {{ '%02d' | format(loop.index) }}</span><br><b>{{ project.get('title', '') }}</b><small>{{ project.get('type_label') or 'Explore. Experiment. Improve.' }}</small><div class="mini-line"></div><div class="mini-line"></div><div class="mini-line"></div></div>
+          {% endif %}
+        </div>
+        <div class="card-body">
+          <span class="tag">{{ '%02d' | format(loop.index) }}{% if project.get('type_label') %} / {{ project.type_label }}{% endif %}</span>
+          <h3>{{ project.get('title', '') }}</h3>
+          {% if project.get('description') %}<p class="muted clamp">{{ project.description }}</p>{% endif %}
+          <div class="card-links">
+            <button class="project-open" type="button">Explore the project ↗</button>
+            {% if project.get('link_url') %}<a href="{{ project.link_url }}" target="_blank" rel="noopener">{{ project.get('link_label') or 'Visit' }} ↗</a>{% endif %}
+          </div>
+          <div class="project-details" hidden>
+            <h2>{{ project.get('title', '') }}</h2>
+            {% if project.get('type_label') %}<p class="tag">{{ project.type_label }}</p>{% endif %}
+            {% if project.get('description') %}<p>{{ project.description }}</p>{% endif %}
+            {% if project.get('tags') %}<div class="pills">{% for tag in project.tags.split(',') if tag.strip() %}<span>{{ tag.strip() }}</span>{% endfor %}</div>{% endif %}
+            {% if project.get('link_url') %}<p><a class="button" href="{{ project.link_url }}" target="_blank" rel="noopener">{{ project.get('link_label') or 'Visit' }} ↗</a></p>{% endif %}
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if has_learning %}
+  <section id="learning" class="split">
+    <div>
+      <p class="eyebrow">{{ skills.get('kicker') or journey.get('kicker') or '03 / Always a student' }}</p>
+      <h2>{{ skills.get('heading_lead') or 'Learning is' }}{% if skills.get('heading_highlight') %}<br><em>{{ skills.heading_highlight }}</em>{% elif not skills.get('heading_lead') %}<br>the whole point.{% endif %}</h2>
+      {% if skills.get('intro') %}<p class="muted">{{ skills.intro }}</p>{% endif %}
+      {% for group in skills.get('groups') or [] %}
+      <div class="skill-group">
+        <h3>{% if group.get('icon') %}<span aria-hidden="true">{{ group.icon }}</span> {% endif %}{{ group.get('title', '') }}</h3>
+        {% if group.get('description') %}<p class="muted">{{ group.description }}</p>{% endif %}
+        {% if group.get('skills') %}<div class="pills">{% for item in group.skills.split(',') if item.strip() %}<span>{{ item.strip() }}</span>{% endfor %}</div>{% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    {% if journey.get('entries') %}
+    <div class="timeline">
+      {% if journey.get('heading') %}<h3 class="timeline-heading">{{ journey.heading }}</h3>{% endif %}
+      {% if journey.get('intro') %}<p class="muted">{{ journey.intro }}</p>{% endif %}
+      {% for entry in journey.entries %}
+      <article>
+        <span class="tag">{{ entry.get('date_range', '') }}{% if entry.get('category_label') %} / {{ entry.category_label }}{% endif %}</span>
+        <h3>{{ entry.get('title', '') }}</h3>
+        {% if entry.get('org_location') or entry.get('description') %}
+        <p class="muted">{% if entry.get('org_location') %}{{ entry.org_location }}{% if entry.get('description') %}<br>{% endif %}{% endif %}{{ entry.get('description') or '' }}</p>
+        {% endif %}
+      </article>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </section>
+  {% endif %}
+
+  {% if contact.get('email') %}
+  <section id="contact" class="contact">
+    <p class="eyebrow">{{ contact.get('kicker') or "04 / What's next?" }}</p>
+    <h2>{{ contact.get('heading') or 'Good things start with a hello.' }}</h2>
+    {% if contact.get('description') %}<p>{{ contact.description }}</p>{% endif %}
+    <div class="actions">
+      <a class="button" href="mailto:{{ contact.email }}">Say hello ↗</a>
+      {% for item in contact.get('socials') or [] %}
+      <a class="button secondary" href="{{ item.get('url', '#') }}" target="_blank" rel="noopener">{{ item.get('label', 'Link') }} ↗</a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+</main>
+
+<footer>
+  <span>© {{ display_name }}</span>
+  <a href="#home">Back to top ↑</a>
+</footer>
+
+<dialog aria-labelledby="project-title">
+  <button type="button" class="dialog-close" aria-label="Close project details">Close ×</button>
+  <p class="eyebrow">Project notebook</p>
+  <div class="details" id="project-title"></div>
+</dialog>
+
+<script src="assets/script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+/* Orbit — lavender bento layout with offset cards. */
+html[data-theme="classic"]{color-scheme:light;--bg:#faf9f6;--ink:#252330;--muted:#73717e;--accent:#7257d8;--btn:#fff;--line:#e5e2ed;--panel:#f0ecf9;--art-bg:#e8e0f6;--art-line:#d9cdec;--note-bg:#fff;--visual-1:#e7e1fc;--visual-2:#d6efe6;--visual-3:#f7dfce;--mini-bg:#fff;--mini-ink:#172035;--mini-muted:#657084;--mini-line:#e4e8f1}
+html[data-theme="dark"]{color-scheme:dark;--bg:#14121c;--ink:#ece9f6;--muted:#a19db3;--accent:#a48cff;--btn:#14121c;--line:#2c2839;--panel:#1d1a28;--art-bg:#241f36;--art-line:#3a3255;--note-bg:#14121c;--visual-1:#2a2442;--visual-2:#1d3530;--visual-3:#3a2a20;--mini-bg:#201d2c;--mini-ink:#ece9f6;--mini-muted:#a19db3;--mini-line:#322e42}
+.hero-art{transform:rotate(3deg);border:1px solid var(--art-line)}
+.hero-art .big{color:var(--accent)}
+.hero-art .note{align-self:end;background:var(--note-bg);padding:12px 18px;border-radius:12px}
+.cards .card:nth-child(3n+2){transform:translateY(25px)}
+.contact{margin-top:25px}
+@media(max-width:760px){.hero-art{transform:none}.cards .card:nth-child(3n+2){transform:none}}

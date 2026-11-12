@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="400" viewBox="0 0 640 400" role="img" aria-labelledby="title desc">
+  <title id="title">Cobalt Swiss thumbnail</title>
+  <desc id="desc">Bold cobalt blue grid with numbered layout accents.</desc>
+  <defs>
+    <linearGradient id="cobalt" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0c1630" />
+      <stop offset="1" stop-color="#10224b" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="400" fill="url(#cobalt)" rx="28" />
+  <rect x="36" y="48" width="568" height="64" rx="18" fill="#1b2bff" opacity="0.18" />
+  <text x="60" y="92" font-family="'Playfair Display', serif" font-size="42" fill="#f0f4ff">Cobalt Swiss</text>
+  <g font-family="'Archivo', sans-serif" fill="#a5b3f0">
+    <text x="60" y="158" font-size="18" letter-spacing="6">CAPABILITIES</text>
+    <text x="60" y="188" font-size="32" fill="#d7dfff">Strategy &amp; Systems</text>
+  </g>
+  <rect x="60" y="212" width="220" height="120" rx="20" fill="#152146" stroke="#26418b" stroke-width="1.5" />
+  <rect x="300" y="212" width="220" height="120" rx="20" fill="#152146" stroke="#26418b" stroke-width="1.5" />
+  <rect x="60" y="344" width="460" height="12" fill="#3e5bff" opacity="0.6" />
+  <text x="90" y="258" font-family="'Archivo', sans-serif" font-size="48" fill="#1b2bff" opacity="0.9">03</text>
+  <text x="150" y="258" font-family="'Archivo', sans-serif" font-size="18" fill="#c3ceff" letter-spacing="4">CASE STUDY</text>
+  <text x="150" y="288" font-family="'Playfair Display', serif" font-size="26" fill="#f0f4ff">Enterprise Blueprint</text>
+  <text x="150" y="320" font-family="'Archivo', sans-serif" font-size="14" fill="#a5b3f0">Cobalt Swiss template preview</text>
+</svg>

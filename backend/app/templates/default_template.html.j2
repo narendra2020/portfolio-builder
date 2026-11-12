@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ profile.display_name or "Portfolio" }}</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>{{ profile.display_name or "Untitled Portfolio" }}</h1>
+    {% if profile.city or profile.country %}
+    <p>{{ [profile.city, profile.country] | select | join(", ") }}</p>
+    {% endif %}
+  </header>
+
+  {% for block in blocks %}
+    {% if block.type == "heading" %}
+    <div class="block"><h2>{{ block.content.text }}</h2></div>
+    {% elif block.type == "text" %}
+    <div class="block"><p>{{ block.content.body }}</p></div>
+    {% elif block.type == "image" %}
+    <div class="block">
+      <img src="{{ block.content.url }}" alt="{{ block.content.caption or '' }}">
+      {% if block.content.caption %}<figcaption>{{ block.content.caption }}</figcaption>{% endif %}
+    </div>
+    {% elif block.type == "skills" %}
+    <div class="block">
+      <div class="chip-list">
+        {% for item in block.content.items %}<span class="chip">{{ item }}</span>{% endfor %}
+      </div>
+    </div>
+    {% elif block.type == "links" %}
+    <div class="block">
+      <div class="link-list">
+        {% for item in block.content.items %}<a href="{{ item.url }}">{{ item.label }}</a>{% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  {% endfor %}
+</div>
+</body>
+</html>

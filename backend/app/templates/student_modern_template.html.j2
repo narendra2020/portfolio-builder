@@ -1,0 +1,241 @@
+{% set hero = answers.get('hero', {}) %}
+{% set about = answers.get('about', {}) %}
+{% set journey = answers.get('journey', {}) %}
+{% set work = answers.get('work', {}) %}
+{% set skills = answers.get('skills', {}) %}
+{% set contact = answers.get('contact', {}) %}
+{% set display_name = (profile.display_name if profile else None) or "Portfolio" %}
+{% set brand_initials = initials or "P" %}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A modern student and graduate portfolio.">
+<meta name="theme-color" content="#071a1c">
+<title>{{ display_name }} | Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#home">{{ brand_initials }}<span>.</span></a>
+    <div class="links" id="links">
+      <a href="#about">About</a>
+      <a href="#work">Projects</a>
+      <a href="#journey">Journey</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <button class="icon-btn" id="theme" aria-label="Toggle theme">☼</button>
+      {% if contact.get('email') %}<a class="btn btn-primary" href="#contact">Let's connect</a>{% endif %}
+      <button class="menu-btn" id="menu" aria-label="Open menu">☰</button>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <section class="hero" id="home">
+    <div class="wrap hero-grid">
+      <div class="reveal">
+        {% if hero.get('eyebrow_text') %}<div class="eyebrow"><span class="dot"></span>{{ hero.eyebrow_text }}</div>{% endif %}
+        <h1>{{ hero.get('headline', display_name) }}{% if hero.get('headline_highlight') %}<br><em>{{ hero.headline_highlight }}</em>{% endif %}</h1>
+        {% if hero.get('lead') %}<p class="lead">{{ hero.lead }}</p>{% endif %}
+        <div class="hero-actions">
+          {% if hero.get('primary_cta_label') %}<a class="btn btn-primary" href="{{ hero.get('primary_cta_target', '#work') }}">{{ hero.primary_cta_label }} ↓</a>{% endif %}
+          {% if hero.get('secondary_cta_label') %}<a class="btn btn-secondary" href="{{ hero.get('secondary_cta_target', '#contact') }}">{{ hero.secondary_cta_label }}</a>{% endif %}
+        </div>
+        {% if hero.get('quick_facts') %}
+        <div class="mini-stats">
+          {% for fact in hero.quick_facts %}<div class="stat"><strong>{{ fact.get('value', '') }}</strong><span>{{ fact.get('label', '') }}</span></div>{% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <div class="hero-visual reveal">
+        {% if hero.get('hero_image_url') or (profile and profile.profile_image) %}
+        <img src="{{ hero.get('hero_image_url') or profile.profile_image }}" alt="{{ display_name }}">
+        {% else %}
+        <div class="placeholder-art"></div>
+        {% endif %}
+        <div class="float-card"><strong>Open to opportunities</strong><small>{{ hero.get('secondary_cta_label') or 'Graduate roles · Internships · Collaborations' }}</small></div>
+      </div>
+    </div>
+  </section>
+
+  {% if about.get('intro_large') or about.get('info_items') or about.get('about_photo') %}
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          {% if about.get('kicker') %}<div class="kicker">{{ about.kicker }}</div>{% endif %}
+          <h2>{{ about.get('heading_lead', 'About me') }}{% if about.get('heading_highlight') %} <span>{{ about.heading_highlight }}</span>{% endif %}</h2>
+        </div>
+        {% if about.get('intro_large') %}<p>{{ about.intro_large }}</p>{% endif %}
+      </div>
+      <div class="about-grid">
+        <div class="panel about-photo reveal">
+          {% if about.get('about_photo') %}
+          <img src="{{ about.about_photo }}" alt="{{ display_name }}">
+          {% else %}
+          <div class="placeholder-art"></div>
+          {% endif %}
+        </div>
+        <div class="panel about-copy reveal">
+          {% if about.get('body') %}<p>{{ about.body }}</p>{% endif %}
+          {% if about.get('info_items') %}
+          <div class="chips">
+            {% for item in about.info_items %}<span class="chip"><strong>{{ item.get('label', '') }}:</strong> {{ item.get('value', '') }}</span>{% endfor %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  {% if work.get('projects') %}
+  <section id="work">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          {% if work.get('kicker') %}<div class="kicker">{{ work.kicker }}</div>{% endif %}
+          <h2>{{ work.get('heading', 'Projects') }}</h2>
+        </div>
+        {% if work.get('intro') %}<p>{{ work.intro }}</p>{% endif %}
+      </div>
+      <div class="project-grid">
+        {% for project in work.projects %}
+        {% if project.get('featured') or loop.first %}
+        <article class="project panel reveal">
+          {% if project.get('image_url') %}
+          <img src="{{ project.image_url }}" alt="{{ project.get('title', '') }}" loading="lazy">
+          {% else %}
+          <div class="placeholder-art"></div>
+          {% endif %}
+          <div class="overlay">
+            <div>
+              {% if project.get('type_label') %}<div class="kicker">{{ project.type_label }}</div>{% endif %}
+              <h3>{{ project.get('title', '') }}</h3>
+              {% if project.get('description') %}<p>{{ project.description }}</p>{% endif %}
+              {% if project.get('tags') %}
+              <div class="chips">
+                {% for tag in project.tags.split(',') %}<span class="chip">{{ tag.strip() }}</span>{% endfor %}
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </article>
+        {% endif %}
+        {% endfor %}
+        <div class="project-side">
+          {% for project in work.projects %}
+          {% if not project.get('featured') and not loop.first %}
+          <article class="project project-small panel reveal">
+            {% if project.get('image_url') %}
+            <img src="{{ project.image_url }}" alt="{{ project.get('title', '') }}" loading="lazy">
+            {% else %}
+            <div class="placeholder-art"></div>
+            {% endif %}
+            <div class="overlay">
+              <div>
+                {% if project.get('type_label') %}<div class="kicker">{{ project.type_label }}</div>{% endif %}
+                <h3>{{ project.get('title', '') }}</h3>
+                {% if project.get('link_label') %}<a class="btn btn-secondary" href="{{ project.get('link_url', '#contact') }}">{{ project.link_label }} →</a>{% endif %}
+              </div>
+            </div>
+          </article>
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  {% if journey.get('entries') %}
+  <section id="journey">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          {% if journey.get('kicker') %}<div class="kicker">{{ journey.kicker }}</div>{% endif %}
+          <h2>{{ journey.get('heading', 'Education & journey') }}</h2>
+        </div>
+        {% if journey.get('intro') %}<p>{{ journey.intro }}</p>{% endif %}
+      </div>
+      <div class="journey">
+        {% for entry in journey.entries %}
+        <div class="panel step reveal">
+          <div class="step-num">{{ '%02d' | format(loop.index) }}</div>
+          {% if entry.get('category_label') %}<div class="kicker">{{ entry.category_label }}</div>{% endif %}
+          <h3>{{ entry.get('title', '') }}</h3>
+          <p>{% if entry.get('org_location') %}{{ entry.org_location }} · {% endif %}{{ entry.get('date_range', '') }}</p>
+          {% if entry.get('description') %}<p>{{ entry.description }}</p>{% endif %}
+          {% if entry.get('tags') %}
+          <ul class="tags">
+            {% for tag in entry.tags.split(',') %}<li>{{ tag.strip() }}</li>{% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  {% if skills.get('groups') %}
+  <section id="skills">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          {% if skills.get('kicker') %}<div class="kicker">{{ skills.kicker }}</div>{% endif %}
+          <h2>{{ skills.get('heading_lead', 'Capabilities') }}{% if skills.get('heading_highlight') %} <span>{{ skills.heading_highlight }}</span>{% endif %}</h2>
+        </div>
+        {% if skills.get('intro') %}<p>{{ skills.intro }}</p>{% endif %}
+      </div>
+      <div class="skills">
+        {% for group in skills.groups %}
+        <div class="panel skill-group reveal">
+          <h3>{{ group.get('icon', '') }} {{ group.get('title', '') }}</h3>
+          {% if group.get('description') %}<p>{{ group.description }}</p>{% endif %}
+          {% if group.get('skills') %}
+          {% for s in group.skills.split(',') %}
+          <div class="skill-row"><strong>{{ s.strip() }}</strong><span class="bar"><i style="--w:{{ 90 - loop.index0 * 6 }}%"></i></span></div>
+          {% endfor %}
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  <section><div class="wrap"><div class="panel quote reveal"><blockquote>"The best portfolios combine curiosity, clear communication and the courage to keep learning."</blockquote></div></div></section>
+
+  {% if contact.get('email') %}
+  <section id="contact">
+    <div class="wrap panel contact reveal">
+      <div>
+        {% if contact.get('kicker') %}<div class="kicker">{{ contact.kicker }}</div>{% endif %}
+        <h2>{{ contact.get('heading', "Let's connect") }}</h2>
+        {% if contact.get('description') %}<p>{{ contact.description }}</p>{% endif %}
+        {% if contact.get('socials') %}
+        <div class="socials">
+          <a class="chip" href="mailto:{{ contact.email }}">{{ contact.email }}</a>
+          {% for link in contact.socials %}<a class="chip" href="{{ link.get('url', '#') }}">{{ link.get('label', '') }}</a>{% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <a class="btn btn-primary" href="mailto:{{ contact.email }}">Start a conversation ↗</a>
+    </div>
+  </section>
+  {% endif %}
+</main>
+
+<footer class="footer"><div class="wrap footer-inner"><strong>{{ display_name }}</strong><span>Designed for students and graduates</span></div></footer>
+<script src="assets/script.js"></script>
+</body>
+</html>

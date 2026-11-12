@@ -1,0 +1,19 @@
+/* Playground — cobalt/yellow playful styling, hard shadows, tilted cards. */
+html[data-theme="classic"]{color-scheme:light;--bg:#fffdf5;--ink:#20201f;--muted:#62625b;--accent:#314bea;--btn:#fff;--line:#252525;--panel:#fff0ad;--art-bg:#ffcf55;--shadow:#252525;--chip:#fff;--contact-bg:#314bea;--yellow:#ffdf63;--visual-1:#c6b3ff;--visual-2:#ffb6a3;--visual-3:#b8e4d0;--mini-bg:#fff;--mini-ink:#20201f;--mini-muted:#62625b;--mini-line:#ececec}
+html[data-theme="dark"]{color-scheme:dark;--bg:#14152b;--ink:#f6f4ea;--muted:#b6b6c8;--accent:#8c9cff;--btn:#14152b;--line:#f6f4ea;--panel:#23244a;--art-bg:#c9971f;--shadow:#000;--chip:#23244a;--contact-bg:#2a3bb8;--yellow:#ffdf63;--visual-1:#4c3d8c;--visual-2:#8c4a3d;--visual-3:#2f6a55;--mini-bg:#1b1c38;--mini-ink:#f6f4ea;--mini-muted:#b6b6c8;--mini-line:#33345c}
+h1{font-weight:900;letter-spacing:-.07em}
+.hero-art{border:2px solid var(--line);border-radius:45% 45% 15px 15px;box-shadow:9px 9px 0 var(--shadow);transform:rotate(-4deg);align-items:center;text-align:center;justify-content:center;gap:25px}
+.hero-art .eyebrow{color:#20201f}
+.hero-art .big{font-size:95px;color:#314bea}
+.hero-art .note{background:var(--chip);color:var(--ink);padding:10px 20px;border:2px solid var(--line);transform:rotate(8deg)}
+.button,.theme-toggle,.menu{border:2px solid var(--line);box-shadow:4px 4px 0 var(--shadow);border-radius:0}
+.card{border:2px solid var(--line);box-shadow:6px 6px 0 var(--shadow);border-radius:16px}
+.cards .card:nth-child(3n+2){transform:rotate(2deg)}
+.cards .card:nth-child(3n){transform:rotate(-2deg)}
+.about-photo{border:2px solid var(--line);box-shadow:6px 6px 0 var(--shadow)}
+.pills span{border:2px solid var(--line);background:var(--chip)}
+.contact{background:var(--contact-bg);color:#fff;margin:70px -3% 0;padding:55px 5%;border:2px solid var(--line);transform:rotate(-1deg)}
+.contact .eyebrow{color:var(--yellow)}
+.contact .button{background:var(--yellow);color:#252525;border-color:#252525}
+.contact .button.secondary{background:#fff;color:#252525}
+@media(max-width:760px){.hero-art,.cards .card:nth-child(n),.contact{transform:none}.contact{margin:50px 0 0}}

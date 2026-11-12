@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="400" viewBox="0 0 640 400" role="img" aria-labelledby="title desc">
+  <title id="title">Playground thumbnail</title>
+  <desc id="desc">Playful cobalt and yellow layout with hard shadows and tilted cards.</desc>
+  <rect width="640" height="400" rx="28" fill="#fffdf5"/>
+  <text x="40" y="58" font-family="Arial, sans-serif" font-size="20" font-weight="800" fill="#20201f">playground.</text>
+  <rect x="514" y="44" width="90" height="26" fill="#252525"/>
+  <rect x="510" y="40" width="90" height="26" fill="#fff" stroke="#252525" stroke-width="2"/>
+  <text x="40" y="118" font-family="Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="3" fill="#314bea">CREATIVE TECHNOLOGY</text>
+  <text x="40" y="168" font-family="Arial, sans-serif" font-size="42" font-weight="900" letter-spacing="-2" fill="#20201f">Big dreams.</text>
+  <text x="40" y="214" font-family="Arial, sans-serif" font-size="42" font-weight="900" letter-spacing="-2" fill="#20201f">Messy sketches.</text>
+  <rect x="44" y="248" width="120" height="34" fill="#252525"/>
+  <rect x="40" y="244" width="120" height="34" fill="#314bea" stroke="#252525" stroke-width="2"/>
+  <g transform="rotate(-5 495 190)"><path d="M415 290 V170 a80 70 0 0 1 160 0 V290 Z" fill="#252525" transform="translate(8 8)"/>
+  <path d="M415 290 V170 a80 70 0 0 1 160 0 V290 Z" fill="#ffcf55" stroke="#252525" stroke-width="2"/>
+  <text x="495" y="215" text-anchor="middle" font-family="Arial, sans-serif" font-size="38" font-weight="800" fill="#314bea">HELLO!</text></g>
+  <rect x="40" y="316" width="170" height="60" rx="12" fill="#c6b3ff" stroke="#252525" stroke-width="2"/>
+  <g transform="rotate(2 320 346)"><rect x="235" y="316" width="170" height="60" rx="12" fill="#ffb6a3" stroke="#252525" stroke-width="2"/></g>
+  <g transform="rotate(-2 515 346)"><rect x="430" y="316" width="170" height="60" rx="12" fill="#b8e4d0" stroke="#252525" stroke-width="2"/></g>
+</svg>

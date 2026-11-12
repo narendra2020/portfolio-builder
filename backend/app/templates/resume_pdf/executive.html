@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @page { size: {{ page_size }}; margin: 18mm 16mm; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Georgia", "Times New Roman", serif;
+    font-size: 10.5pt;
+    line-height: 1.4;
+    color: #1a1a1a;
+    margin: 0;
+  }
+  .name { font-size: 21pt; font-weight: 700; letter-spacing: 0.5pt; margin: 0 0 2pt 0; }
+  .contact-line { font-size: 9.5pt; color: #333; margin: 0 0 14pt 0; }
+  .contact-line span:not(:last-child)::after { content: " \2022 "; color: #999; }
+  h2.section-title {
+    font-size: 12pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5pt;
+    border-bottom: 1pt solid #1a1a1a;
+    padding-bottom: 2pt;
+    margin: 16pt 0 7pt 0;
+  }
+  .entry { margin-bottom: 8pt; page-break-inside: avoid; }
+  .entry-header { display: flex; justify-content: space-between; font-weight: 700; }
+  .entry-subheader { display: flex; justify-content: space-between; font-style: italic; color: #333; font-size: 10pt; }
+  ul.bullets { margin: 3pt 0 0 0; padding-left: 14pt; }
+  ul.bullets li { margin-bottom: 2pt; }
+  p.summary-text { margin: 0; }
+  .skills-group { margin-bottom: 3pt; }
+  .skills-group .group-title { font-weight: 700; }
+</style>
+</head>
+<body>
+  {% set p = content.personal or {} %}
+  <div class="name">{{ p.full_name or "" }}</div>
+  <div class="contact-line">
+    {% if p.email %}<span>{{ p.email }}</span>{% endif %}
+    {% if p.phone %}<span>{{ p.phone }}</span>{% endif %}
+    {% if p.city or p.country %}<span>{{ [p.city, p.country]|select|join(', ') }}</span>{% endif %}
+    {% if p.linkedin_url %}<span>{{ p.linkedin_url }}</span>{% endif %}
+    {% if p.portfolio_url %}<span>{{ p.portfolio_url }}</span>{% endif %}
+    {% if p.github_url %}<span>{{ p.github_url }}</span>{% endif %}
+  </div>
+
+  {% if content.summary and content.summary.text %}
+  <h2 class="section-title">Summary</h2>
+  <p class="summary-text">{{ content.summary.text }}</p>
+  {% endif %}
+
+  {% if content.experience %}
+  <h2 class="section-title">Experience</h2>
+  {% for item in content.experience %}
+  <div class="entry">
+    <div class="entry-header"><span>{{ item.title }}</span><span>{{ item.date_range or '' }}</span></div>
+    <div class="entry-subheader"><span>{{ item.employer }}{% if item.location %}, {{ item.location }}{% endif %}</span></div>
+    {% if item.bullets %}
+    <ul class="bullets">
+      {% for b in item.bullets %}<li>{{ b.text }}</li>{% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+  {% endfor %}
+  {% endif %}
+
+  {% if content.projects %}
+  <h2 class="section-title">Projects</h2>
+  {% for proj in content.projects %}
+  <div class="entry">
+    <div class="entry-header"><span>{{ proj.title }}</span></div>
+    {% if proj.description_bullets %}
+    <ul class="bullets">
+      {% for b in proj.description_bullets %}<li>{{ b.text }}</li>{% endfor %}
+    </ul>
+    {% endif %}
+    {% if proj.tags %}<div class="entry-subheader"><span>{{ proj.tags|join(', ') }}</span></div>{% endif %}
+  </div>
+  {% endfor %}
+  {% endif %}
+
+  {% if content.skills and content.skills.groups %}
+  <h2 class="section-title">Skills</h2>
+  {% for group in content.skills.groups %}
+  <div class="skills-group"><span class="group-title">{{ group.title }}:</span> {{ group.skills|join(', ') }}</div>
+  {% endfor %}
+  {% endif %}
+
+  {% if content.education %}
+  <h2 class="section-title">Education</h2>
+  {% for edu in content.education %}
+  <div class="entry">
+    <div class="entry-header"><span>{{ edu.degree }}</span><span>{{ edu.date_range or '' }}</span></div>
+    <div class="entry-subheader"><span>{{ edu.institution }}{% if edu.field %}, {{ edu.field }}{% endif %}</span></div>
+  </div>
+  {% endfor %}
+  {% endif %}
+
+  {% if content.certifications %}
+  <h2 class="section-title">Certifications</h2>
+  <ul class="bullets">
+    {% for c in content.certifications %}<li>{{ c.name }}{% if c.issuer %} — {{ c.issuer }}{% endif %}{% if c.date %} ({{ c.date }}){% endif %}</li>{% endfor %}
+  </ul>
+  {% endif %}
+
+  {% if content.achievements %}
+  <h2 class="section-title">Achievements</h2>
+  <ul class="bullets">
+    {% for a in content.achievements %}<li>{{ a.text }}</li>{% endfor %}
+  </ul>
+  {% endif %}
+
+  {% for section in content.additional_sections or [] %}
+  <h2 class="section-title">{{ section.heading }}</h2>
+  <ul class="bullets">
+    {% for i in section.items %}<li>{{ i }}</li>{% endfor %}
+  </ul>
+  {% endfor %}
+</body>
+</html>

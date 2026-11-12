@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="400" viewBox="0 0 640 400" role="img" aria-labelledby="title desc">
+  <title id="title">Paper thumbnail</title>
+  <desc id="desc">Serif editorial layout on warm paper with an arch-shaped identity panel.</desc>
+  <rect width="640" height="400" rx="28" fill="#f5f0e7"/>
+  <text x="40" y="58" font-family="Georgia, serif" font-size="22" fill="#342c27">paper.</text>
+  <rect x="510" y="40" width="90" height="26" rx="13" fill="none" stroke="#d9cfc2"/>
+  <text x="40" y="118" font-family="Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="3" fill="#a64b33">DESIGN STUDENT</text>
+  <text x="40" y="180" font-family="Georgia, serif" font-size="56" letter-spacing="-3" fill="#342c27">A fresh</text>
+  <text x="40" y="238" font-family="Georgia, serif" font-size="56" letter-spacing="-3" fill="#342c27">perspective.</text>
+  <rect x="40" y="266" width="120" height="34" fill="#a64b33"/>
+  <path d="M430 300 V170 a80 80 0 0 1 160 0 V300 Z" fill="#bc6349"/>
+  <text x="510" y="220" text-anchor="middle" font-family="Georgia, serif" font-size="46" fill="#fff">tq.</text>
+  <line x1="40" y1="330" x2="600" y2="330" stroke="#d9cfc2"/>
+  <rect x="40" y="342" width="250" height="40" fill="#e9d9c7"/>
+  <rect x="310" y="350" width="200" height="8" fill="#d9cfc2"/>
+  <rect x="310" y="366" width="150" height="8" fill="#d9cfc2"/>
+</svg>
